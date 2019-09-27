@@ -1,24 +1,23 @@
 package com.johnm.codeqrmanagementmod.managementCodeQr
 
 
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
-import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
 import android.util.Log
 import android.view.*
 import android.webkit.URLUtil
 import android.widget.Toast
-
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import com.google.android.gms.vision.CameraSource
 import com.google.android.gms.vision.Detector
 import com.google.android.gms.vision.barcode.Barcode
 import com.google.android.gms.vision.barcode.BarcodeDetector
 import com.johnm.codeqrmanagementmod.R
-import kotlinx.android.synthetic.main.barcode_reader_layout.*
 import java.io.IOException
 
 
@@ -31,14 +30,18 @@ class BarcodeReaderFragment : Fragment() {
     private var cameraView: SurfaceView? = null
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?) =
-        inflater.inflate(R.layout.barcode_reader_layout, container)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ) =
+        inflater.inflate(R.layout.barcode_reader_layout, container, false)
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initConfigBarcodeAndCamera()
         cameraView = view.findViewById(R.id.camera_view)
+        initConfigBarcodeAndCamera()
     }
 
 
@@ -48,9 +51,12 @@ class BarcodeReaderFragment : Fragment() {
             .setBarcodeFormats(Barcode.QR_CODE)
             .build()
 
+        val wm = this.context?.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        val display = wm.defaultDisplay
+
         // creo la camara fuente
         cameraSource = CameraSource.Builder(context!!, barcodeDetector)
-            .setRequestedPreviewSize(cameraView!!.width, cameraView!!.height)
+            .setRequestedPreviewSize(display.width, display.height)
             .build()
 
         cameraView!!.holder.addCallback(object : SurfaceHolder.Callback {
@@ -73,7 +79,13 @@ class BarcodeReaderFragment : Fragment() {
                 }
             }
 
-            override fun surfaceChanged(holder: SurfaceHolder, format: Int, width: Int, height: Int) {}
+            override fun surfaceChanged(
+                holder: SurfaceHolder,
+                format: Int,
+                width: Int,
+                height: Int
+            ) {
+            }
 
             override fun surfaceDestroyed(holder: SurfaceHolder) {
                 cameraSource?.stop()
@@ -114,22 +126,10 @@ class BarcodeReaderFragment : Fragment() {
                             startActivity(shareIntent)
                         }
 
-                        Thread(object : Runnable {
-                            override fun run() {
-                                try {
-                                    synchronized(this) {
-                                        Handler().postDelayed(
-                                            // limpiamos el token
-                                            { tokenBefore = "" }, 5000
-                                        )
-                                    }
-                                } catch (e: InterruptedException) {
-                                    Log.e("Error", "Waiting didnt work!!")
-                                    e.printStackTrace()
-                                }
-
-                            }
-                        }).start()
+                        Handler().postDelayed(
+                            // limpiamos el token
+                            { tokenBefore = "" }, 5000
+                        )
 
                     }
                 }
