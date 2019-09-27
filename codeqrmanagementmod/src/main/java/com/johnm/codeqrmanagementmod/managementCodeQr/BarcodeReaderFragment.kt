@@ -41,56 +41,16 @@ class BarcodeReaderFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         cameraView = view.findViewById(R.id.camera_view)
-        initConfigBarcodeAndCamera()
+        initConfigBarcode()
+        initConfigCamera()
     }
 
 
-    fun initConfigBarcodeAndCamera() {
+    fun initConfigBarcode() {
         // creo el detector qr
         barcodeDetector = BarcodeDetector.Builder(context)
             .setBarcodeFormats(Barcode.QR_CODE)
             .build()
-
-        val wm = this.context?.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-        val display = wm.defaultDisplay
-
-        // creo la camara fuente
-        cameraSource = CameraSource.Builder(context!!, barcodeDetector)
-            .setRequestedPreviewSize(display.width, display.height)
-            .build()
-
-        cameraView!!.holder.addCallback(object : SurfaceHolder.Callback {
-            override fun surfaceCreated(holder: SurfaceHolder) {
-
-                // verifico si el usuario dio los permisos para la camara
-                if (ContextCompat.checkSelfPermission(
-                        context!!,
-                        android.Manifest.permission.CAMERA
-                    ) == PackageManager.PERMISSION_GRANTED
-                ) {
-                    try {
-                        cameraSource?.start(cameraView!!.getHolder())
-                    } catch (ie: IOException) {
-                        Log.e("CAMERA SOURCE", ie.message)
-                    }
-
-                } else {
-                    Toast.makeText(context, "ERROR FATAL", Toast.LENGTH_SHORT).show()
-                }
-            }
-
-            override fun surfaceChanged(
-                holder: SurfaceHolder,
-                format: Int,
-                width: Int,
-                height: Int
-            ) {
-            }
-
-            override fun surfaceDestroyed(holder: SurfaceHolder) {
-                cameraSource?.stop()
-            }
-        })
 
         // preparo el detector de QR
         barcodeDetector?.setProcessor(object : Detector.Processor<Barcode> {
@@ -137,6 +97,49 @@ class BarcodeReaderFragment : Fragment() {
         })
 
 
+    }
+
+    fun initConfigCamera() {
+        val wm = this.context?.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        val display = wm.defaultDisplay
+
+        // creo la camara fuente
+        cameraSource = CameraSource.Builder(context!!, barcodeDetector)
+            .setRequestedPreviewSize(display.width, display.height)
+            .build()
+
+        cameraView!!.holder.addCallback(object : SurfaceHolder.Callback {
+            override fun surfaceCreated(holder: SurfaceHolder) {
+
+                // verifico si el usuario dio los permisos para la camara
+                if (ContextCompat.checkSelfPermission(
+                        context!!,
+                        android.Manifest.permission.CAMERA
+                    ) == PackageManager.PERMISSION_GRANTED
+                ) {
+                    try {
+                        cameraSource?.start(cameraView!!.getHolder())
+                    } catch (ie: IOException) {
+                        Log.e("CAMERA SOURCE", ie.message)
+                    }
+
+                } else {
+                    Toast.makeText(context, "ERROR FATAL", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun surfaceChanged(
+                holder: SurfaceHolder,
+                format: Int,
+                width: Int,
+                height: Int
+            ) {
+            }
+
+            override fun surfaceDestroyed(holder: SurfaceHolder) {
+                cameraSource?.stop()
+            }
+        })
     }
 
 }
