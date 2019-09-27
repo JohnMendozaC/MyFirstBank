@@ -18,6 +18,7 @@ import com.google.android.gms.vision.Detector
 import com.google.android.gms.vision.barcode.Barcode
 import com.google.android.gms.vision.barcode.BarcodeDetector
 import com.johnm.codeqrmanagementmod.R
+import kotlinx.android.synthetic.main.barcode_reader_layout.*
 import java.io.IOException
 
 
@@ -27,7 +28,7 @@ class BarcodeReaderFragment : Fragment() {
     private var cameraSource: CameraSource? = null
     private var token: String = ""
     private var tokenBefore: String = ""
-    private var cameraView: SurfaceView? = null
+    lateinit var showImageQr: (token: String) -> Unit
 
 
     override fun onCreateView(
@@ -40,7 +41,6 @@ class BarcodeReaderFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        cameraView = view.findViewById(R.id.camera_view)
         initConfigBarcode()
         initConfigCamera()
     }
@@ -61,37 +61,38 @@ class BarcodeReaderFragment : Fragment() {
                 val barcodes = detections.detectedItems
 
                 if (barcodes.size() > 0) {
-
-                    // obtenemos el token
                     token = barcodes.valueAt(0).displayValue.toString()
+                    showImageQr(token)
+                    /* // obtenemos el token
+                     token = barcodes.valueAt(0).displayValue.toString()
 
-                    // verificamos que el token anterior no se igual al actual
-                    // esto es util para evitar multiples llamadas empleando el mismo token
-                    if (!token.equals(tokenBefore)) {
+                     // verificamos que el token anterior no se igual al actual
+                     // esto es util para evitar multiples llamadas empleando el mismo token
+                     if (!token.equals(tokenBefore)) {
 
-                        // guardamos el ultimo token proceado
-                        tokenBefore = token
-                        Log.i("token", token)
+                         // guardamos el ultimo token proceado
+                         tokenBefore = token
+                         Log.i("token", token)
 
-                        if (URLUtil.isValidUrl(token)) {
-                            // si es una URL valida abre el navegador
-                            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(token))
-                            startActivity(browserIntent)
-                        } else {
-                            // comparte en otras apps
-                            val shareIntent = Intent()
-                            shareIntent.action = Intent.ACTION_SEND
-                            shareIntent.putExtra(Intent.EXTRA_TEXT, token)
-                            shareIntent.type = "text/plain"
-                            startActivity(shareIntent)
-                        }
+                         if (URLUtil.isValidUrl(token)) {
+                             // si es una URL valida abre el navegador
+                             val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(token))
+                             startActivity(browserIntent)
+                         } else {
+                             // comparte en otras apps
+                             val shareIntent = Intent()
+                             shareIntent.action = Intent.ACTION_SEND
+                             shareIntent.putExtra(Intent.EXTRA_TEXT, token)
+                             shareIntent.type = "text/plain"
+                             startActivity(shareIntent)
+                         }
 
-                        Handler().postDelayed(
-                            // limpiamos el token
-                            { tokenBefore = "" }, 5000
-                        )
+                         Handler().postDelayed(
+                             // limpiamos el token
+                             { tokenBefore = "" }, 5000
+                         )
 
-                    }
+                     }*/
                 }
             }
         })
@@ -108,7 +109,7 @@ class BarcodeReaderFragment : Fragment() {
             .setRequestedPreviewSize(display.width, display.height)
             .build()
 
-        cameraView!!.holder.addCallback(object : SurfaceHolder.Callback {
+        camera_view.holder.addCallback(object : SurfaceHolder.Callback {
             override fun surfaceCreated(holder: SurfaceHolder) {
 
                 // verifico si el usuario dio los permisos para la camara
@@ -118,7 +119,7 @@ class BarcodeReaderFragment : Fragment() {
                     ) == PackageManager.PERMISSION_GRANTED
                 ) {
                     try {
-                        cameraSource?.start(cameraView!!.getHolder())
+                        cameraSource?.start(camera_view.getHolder())
                     } catch (ie: IOException) {
                         Log.e("CAMERA SOURCE", ie.message)
                     }
