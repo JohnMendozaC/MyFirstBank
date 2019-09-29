@@ -3,4 +3,5 @@
     <string name="transfer_codeqr">Transferencia QR</string>
     <string name="create_codeqr">Crear</string>
     <string name="reade_codeqr">Recibir</string>
+    <string name="type_account">Tipo de cuenta:</string>
 </resources>
