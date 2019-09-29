@@ -10,11 +10,11 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/codeqrmanagementmod" />
+            <option value="$PROJECT_DIR$/loginmanagementmod" />
             <option value="$PROJECT_DIR$/persistencemanagementmod" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
-        <option name="testRunner" value="PLATFORM" />
       </GradleProjectSettings>
     </option>
   </component>

@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">viewUtil</string>
+    <string name="bank_name">Bienvenido a Bank Develonment</string>
+    <string name="user_name">Ingrese Usuario</string>
+    <string name="pass_name">Ingrese Clave</string>
+    <string name="button_continue">Continuar</string>
+    <string name="button_login">Ingresar</string>
+    <string name="user_invalid">Usuario Invalido</string>
+</resources>

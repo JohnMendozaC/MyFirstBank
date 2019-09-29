@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/transfer_codeqr"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/admin_codeqr"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+    />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/admin_codeqr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/barcode_create">
+
+        <Button
+                android:id="@+id/btn_createqr"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/create_codeqr"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/btn_readeqr"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+        <Button
+                android:id="@+id/btn_readeqr"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/reade_codeqr"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/btn_createqr"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.johnm.codeqrmanagementmod.managementCodeQr.customizedviews.BarcodeCreateQrView
+            android:id="@+id/barcode_create"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/admin_codeqr"
+    />
+
+    <com.johnm.codeqrmanagementmod.managementCodeQr.customizedviews.BarcodeReaderView
+            android:id="@+id/barcode_reade"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/admin_codeqr"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

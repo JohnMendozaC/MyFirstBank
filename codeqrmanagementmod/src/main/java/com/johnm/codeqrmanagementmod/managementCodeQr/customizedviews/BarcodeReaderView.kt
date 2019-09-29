@@ -1,28 +1,32 @@
-package com.johnm.codeqrmanagementmod.managementCodeQr
+package com.johnm.codeqrmanagementmod.managementCodeQr.customizedviews
 
 
 import android.content.Context
-import android.content.Intent
 import android.content.pm.PackageManager
-import android.net.Uri
-import android.os.Bundle
-import android.os.Handler
+import android.util.AttributeSet
 import android.util.Log
-import android.view.*
-import android.webkit.URLUtil
+import android.view.SurfaceHolder
+import android.view.WindowManager
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import com.google.android.gms.vision.CameraSource
 import com.google.android.gms.vision.Detector
 import com.google.android.gms.vision.barcode.Barcode
 import com.google.android.gms.vision.barcode.BarcodeDetector
 import com.johnm.codeqrmanagementmod.R
-import kotlinx.android.synthetic.main.barcode_reader_layout.*
+import kotlinx.android.synthetic.main.barcode_reader_layout.view.*
 import java.io.IOException
 
 
-class BarcodeReaderFragment : Fragment() {
+class BarcodeReaderView @JvmOverloads constructor(
+    context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
+) : ConstraintLayout(context, attrs, defStyleAttr) {
+
+
+    init {
+        onCreateView()
+    }
 
     private var barcodeDetector: BarcodeDetector? = null
     private var cameraSource: CameraSource? = null
@@ -31,20 +35,11 @@ class BarcodeReaderFragment : Fragment() {
     lateinit var showImageQr: (token: String) -> Unit
 
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ) =
-        inflater.inflate(R.layout.barcode_reader_layout, container, false)
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    fun onCreateView() {
+        inflate(context, R.layout.barcode_reader_layout, this)
         initConfigBarcode()
         initConfigCamera()
     }
-
 
     fun initConfigBarcode() {
         // creo el detector qr

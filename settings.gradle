@@ -1,1 +1,1 @@
-include ':app', ':codeqrmanagementmod', ':persistencemanagementmod'
+include ':app', ':codeqrmanagementmod', ':persistencemanagementmod', ':loginmanagementmod'

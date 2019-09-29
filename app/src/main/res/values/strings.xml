@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MyFirstBank</string>
+    <string name="user_name_account">Nombre Usuario:</string>
+    <string name="account_balance">Saldo Cuenta:</string>
 </resources>

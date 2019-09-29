@@ -2,26 +2,30 @@ package com.johnm.myfirstbank
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.johnm.codeqrmanagementmod.managementCodeQr.BarcodeCreateQrFragment
-import com.johnm.codeqrmanagementmod.managementCodeQr.BarcodeReaderFragment
+import androidx.fragment.app.Fragment
+import com.johnm.myfirstbank.fragments.AccountUserFragment
+import com.johnm.viewutil.LoginFragment
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        initLogin()
+    }
 
+    private fun initLogin() {
+        val loginFragment = LoginFragment()
+        loginFragment.launchAccountUser = { launchFragment(AccountUserFragment()) }
+        launchFragment(loginFragment)
+    }
+
+    private fun launchFragment(fragment: Fragment) {
+        tableFragmnet.removeAllViews()
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-        val barcodeReaderFragment = BarcodeReaderFragment()
-        barcodeReaderFragment.showImageQr = { token -> launchCodeQr(token) }
-        fragmentTransaction.add(R.id.tableFragmnet, barcodeReaderFragment)
+        fragmentTransaction.add(R.id.tableFragmnet, fragment)
         fragmentTransaction.commit()
     }
 
-
-    fun launchCodeQr(tokenQr: String) {
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.add(R.id.tableFragmnet, BarcodeCreateQrFragment(tokenQr))
-        fragmentTransaction.commit()
-    }
 }
