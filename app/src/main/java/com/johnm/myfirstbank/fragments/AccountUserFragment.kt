@@ -27,14 +27,14 @@ class AccountUserFragment : Fragment() {
 
     fun initButtons() {
         btn_check_weather.setOnClickListener {
-            //changeMenuAccount()
+            changeMenuAccount(WheatherCondictionFragment())
             btn_check_weather.isEnabled = false
             btn_check_qr.isEnabled = true
             btn_check_account.isEnabled = true
         }
 
         btn_check_account.setOnClickListener {
-            //changeMenuAccount()
+            changeMenuAccount(TransferUserFragment())
             btn_check_account.isEnabled = false
             btn_check_qr.isEnabled = true
             btn_check_weather.isEnabled = true

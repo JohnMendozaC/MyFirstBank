@@ -2,4 +2,6 @@
     <string name="app_name">MyFirstBank</string>
     <string name="user_name_account">Nombre Usuario:</string>
     <string name="account_balance">Saldo Cuenta:</string>
+    <string name="show_account_save">Ahorros</string>
+    <string name="show_account_stream">Corriente</string>
 </resources>

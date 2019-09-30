@@ -4,4 +4,8 @@
     <string name="create_codeqr">Crear</string>
     <string name="reade_codeqr">Recibir</string>
     <string name="type_account">Tipo de cuenta:</string>
+    <string name="value_account">Valor:</string>
+    <string name="value_double">0.0</string>
+    <string name="btn_create_codeqr">QR</string>
+    <string name="account_user">Cuentas del usuario</string>
 </resources>

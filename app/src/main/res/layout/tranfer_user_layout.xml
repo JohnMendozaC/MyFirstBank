@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <TextView
+            android:id="@+id/tv_transfer_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/account_user"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/admin_codeqr"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"/>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/admin_codeqr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/tv_transfer_user">
+
+        <Button
+                android:id="@+id/btn_show_stream"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/show_account_stream"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/btn_show_save"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+        <Button
+                android:id="@+id/btn_show_save"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/show_account_save"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/btn_show_stream"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/show_transfer_user"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/admin_codeqr"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

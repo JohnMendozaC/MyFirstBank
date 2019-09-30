@@ -1,11 +1,14 @@
 package com.johnm.myfirstbank
 
+import android.Manifest.permission.ACCESS_FINE_LOCATION
+import android.Manifest.permission.CAMERA
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import com.johnm.myfirstbank.fragments.AccountUserFragment
+import com.johnm.myfirstbank.ui.PermissionUtils
 import com.johnm.viewutil.LoginFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -16,6 +19,9 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         fragmentTransaction = supportFragmentManager
         initLogin()
+
+        PermissionUtils.requestPermissions(this)
+
     }
 
     private fun initLogin() {
@@ -35,6 +41,7 @@ class MainActivity : AppCompatActivity() {
 
     companion object {
         var fragmentTransaction: FragmentManager? = null
+
     }
 
 }

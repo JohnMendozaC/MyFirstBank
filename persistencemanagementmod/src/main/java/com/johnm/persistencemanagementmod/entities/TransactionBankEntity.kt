@@ -3,12 +3,23 @@ package com.johnm.persistencemanagementmod.entities
 import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
 @Entity(
-    tableName = TransactionBankEntity.TABLE_NAME
+    tableName = TransactionBankEntity.TABLE_NAME,
+    foreignKeys = [
+        ForeignKey(
+            entity = AccountBankEntity::class,
+            parentColumns = [AccountBankEntity.ACCOUNT_BANK_ID_COLUMN_NAME],
+            childColumns = [TransactionBankEntity.ACCOUNT_BANK_ID_COLUMN_NAME]
+        )
+    ]
 )
 class TransactionBankEntity(
+    @NonNull
+    @ColumnInfo(name = ACCOUNT_BANK_ID_COLUMN_NAME)
+    var accountId: Int = 0,
     @NonNull
     @ColumnInfo(name = DATE_TRANS_BANK_COLUMN_NAME)
     var dateTransBank: Long,
@@ -28,6 +39,7 @@ class TransactionBankEntity(
     companion object {
         const val TABLE_NAME = "TRANSACTION_BANK"
         const val TRANS_BANK_ID_COLUMN_NAME = "TRANS_BANK_ID"
+        const val ACCOUNT_BANK_ID_COLUMN_NAME = "ACCOUNT_BANK_ID"
         const val DATE_TRANS_BANK_COLUMN_NAME = "DATE_TRANS_BANK"
         const val DESC_TRANS_COLUMN_NAME = "DESC_TRANS_BANK"
         const val VAL_TRANS_COLUMN_NAME = "VAL_TRANS_BANK"

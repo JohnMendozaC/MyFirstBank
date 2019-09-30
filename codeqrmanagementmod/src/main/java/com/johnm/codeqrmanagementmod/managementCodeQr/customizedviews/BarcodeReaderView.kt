@@ -24,16 +24,14 @@ class BarcodeReaderView @JvmOverloads constructor(
 ) : ConstraintLayout(context, attrs, defStyleAttr) {
 
 
-    init {
-        onCreateView()
-    }
-
     private var barcodeDetector: BarcodeDetector? = null
     private var cameraSource: CameraSource? = null
     private var token: String = ""
-    private var tokenBefore: String = ""
-    lateinit var showImageQr: (token: String) -> Unit
 
+
+    init {
+        onCreateView()
+    }
 
     fun onCreateView() {
         inflate(context, R.layout.barcode_reader_layout, this)
@@ -57,42 +55,10 @@ class BarcodeReaderView @JvmOverloads constructor(
 
                 if (barcodes.size() > 0) {
                     token = barcodes.valueAt(0).displayValue.toString()
-                    showImageQr(token)
-                    /* // obtenemos el token
-                     token = barcodes.valueAt(0).displayValue.toString()
 
-                     // verificamos que el token anterior no se igual al actual
-                     // esto es util para evitar multiples llamadas empleando el mismo token
-                     if (!token.equals(tokenBefore)) {
-
-                         // guardamos el ultimo token proceado
-                         tokenBefore = token
-                         Log.i("token", token)
-
-                         if (URLUtil.isValidUrl(token)) {
-                             // si es una URL valida abre el navegador
-                             val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(token))
-                             startActivity(browserIntent)
-                         } else {
-                             // comparte en otras apps
-                             val shareIntent = Intent()
-                             shareIntent.action = Intent.ACTION_SEND
-                             shareIntent.putExtra(Intent.EXTRA_TEXT, token)
-                             shareIntent.type = "text/plain"
-                             startActivity(shareIntent)
-                         }
-
-                         Handler().postDelayed(
-                             // limpiamos el token
-                             { tokenBefore = "" }, 5000
-                         )
-
-                     }*/
                 }
             }
         })
-
-
     }
 
     fun initConfigCamera() {

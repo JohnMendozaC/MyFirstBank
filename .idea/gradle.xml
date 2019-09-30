@@ -12,6 +12,7 @@
             <option value="$PROJECT_DIR$/codeqrmanagementmod" />
             <option value="$PROJECT_DIR$/loginmanagementmod" />
             <option value="$PROJECT_DIR$/persistencemanagementmod" />
+            <option value="$PROJECT_DIR$/webservicemanagementmod" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

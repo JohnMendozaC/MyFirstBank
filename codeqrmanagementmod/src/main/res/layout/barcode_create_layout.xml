@@ -16,25 +16,74 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-                android:id="@+id/tv_type_account"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/type_account"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintLeft_toRightOf="@+id/option_account"
-                app:layout_constraintTop_toTopOf="parent"/>
 
-        <Spinner
-                android:id="@+id/option_account"
+        <LinearLayout
+                android:id="@+id/container_type_account_one"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toTopOf="@+id/container_type_account_two"
+                app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                    android:id="@+id/tv_type_account"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/type_account"/>
+
+            <Spinner
+                    android:id="@+id/option_account"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+                android:id="@+id/container_type_account_two"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toTopOf="@+id/btn_createqr"
+                app:layout_constraintTop_toBottomOf="@+id/container_type_account_one">
+
+            <TextView
+                    android:id="@+id/tv_value_account"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/value_account"/>
+
+            <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:hint="@string/value_double"
+                    android:inputType="numberDecimal"
+                    android:maxLength="7"/>
+
+            <Spinner
+                    android:id="@+id/option_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+            />
+
+
+        </LinearLayout>
+
+        <Button
+                android:id="@+id/btn_createqr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/btn_create_codeqr"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toRightOf="@+id/tv_type_account"
+                app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toBottomOf="@+id/container_type_account_two"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -43,6 +92,8 @@
             android:id="@+id/image_code_qr"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/common_google_signin_btn_text_dark"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"

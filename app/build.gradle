@@ -36,4 +36,5 @@ dependencies {
     implementation project(path: ':codeqrmanagementmod')
     implementation project(path: ':persistencemanagementmod')
     implementation project(path: ':loginmanagementmod')
+    implementation 'androidx.recyclerview:recyclerview:1.0.0-rc02'
 }
